@@ -2,103 +2,74 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Lucky Jet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinais Oficiais</title>
+    <!-- Подключаем Tailwind CSS для стилизации -->
     <script src="https://tailwindcss.com"></script>
+    <!-- Подключаем официальный скрипт Telegram WebApp -->
     <script src="https://telegram.org"></script>
     <style>
-        @keyframes radar-scan {
+        /* Анимация вращения круга */
+        @keyframes spin-slow {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        .animate-radar { animation: radar-scan 2s linear infinite; }
-        .neon-glow { box-shadow: 0 0 15px rgba(147, 51, 234, 0.35); }
+        .animate-spin-slow {
+            animation: spin-slow 2s linear infinite;
+        }
     </style>
 </head>
-<body class="bg-[#0b081a] text-white flex flex-col items-center justify-between min-h-screen p-3 font-sans select-none overflow-hidden">
+<body class="bg-slate-900 text-white flex flex-col items-center justify-center min-h-screen p-4 font-sans select-none">
 
-    <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
-    <div class="w-full flex flex-col items-center text-center mt-1">
-        <div class="flex items-center space-x-1.5 bg-purple-950/40 border border-purple-500/20 px-2.5 py-0.5 rounded-full backdrop-blur-sm">
-            <svg class="w-4 h-4 text-pink-500 animate-bounce" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 12 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6zM12 4c.55 0 1 .45 1 1v1.17c1.72.44 3 2.01 3 3.83v2l2v1H6v-1l2-2v-2c0-1.82 1.28-3.39 3-3.83V5c0-.55.45-1 1-1z"/>
-            </svg>
-            <span class="text-sm font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-pink-500 to-amber-400">LUCKY JET MOD</span>
-        </div>
-        <p class="text-[9px] text-purple-300/40 font-mono mt-1 uppercase tracking-widest">v4.1 AI</p>
+    <!-- Заголовок -->
+    <div class="text-center mb-8">
+        <h1 class="text-2xl font-black tracking-wider text-amber-400">⚡ HACKER ALGORITMO</h1>
+        <p class="text-sm text-slate-400 mt-1">Analisando a matriz do jogo em tempo real...</p>
     </div>
 
-    <!-- ЦЕНТРАЛЬНАЯ ЧАСТЬ (Уменьшенные размеры) -->
-    <div class="flex flex-col items-center justify-center w-full my-auto">
-        
-        <!-- ЭКРАН 1: Радар (Уменьшен с 52 до 44 единиц) -->
-        <div id="radar-screen" class="flex flex-col items-center">
-            <div class="relative w-44 h-44 flex items-center justify-center bg-purple-950/10 border border-purple-500/20 rounded-full neon-glow">
-                <div class="absolute w-32 h-32 border border-blue-500/15 rounded-full"></div>
-                <div class="absolute w-20 h-20 border border-pink-500/10 rounded-full"></div>
-                <div class="absolute w-10 h-10 border border-purple-500/20 rounded-full"></div>
-                <div class="absolute w-full h-[1px] bg-blue-500/10"></div>
-                <div class="absolute h-full w-[1px] bg-blue-500/10"></div>
-                <div class="absolute inset-0 rounded-full border border-transparent border-t-pink-500 border-l-blue-500/30 animate-radar"></div>
-                
-                <div class="relative z-10 w-11 h-11 flex items-center justify-center bg-gradient-to-tr from-purple-600 to-pink-600 rounded-full shadow-[0_0_10px_#d946ef]">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.656 48.656 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7C4.547 9.547 4.5 10.768 4.5 12s.047 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.092-1.209.138-2.43.138-3.662z" />
-                    </svg>
-                </div>
-            </div>
-            <div class="mt-4 flex items-center space-x-1.5 text-blue-400 font-mono text-[10px] bg-blue-950/40 px-2.5 py-1 rounded-lg border border-blue-500/15 animate-pulse">
-                <span class="w-1 h-1 bg-blue-400 rounded-full"></span>
-                <span>CONECTANDO...</span>
-            </div>
+    <!-- ЭКРАН 1: Крутящийся радар / Сканирование -->
+    <div id="radar-screen" class="flex flex-col items-center justify-center">
+        <div class="relative w-48 h-48 flex items-center justify-center">
+            <!-- Внешний светящийся пульсирующий круг -->
+            <div class="absolute inset-0 rounded-full border-2 border-dashed border-amber-500/30 animate-pulse"></div>
+            <!-- Вращающийся внутренний радар -->
+            <div class="absolute inset-2 rounded-full border-4 border-t-amber-500 border-r-transparent border-b-transparent border-l-transparent animate-spin-slow"></div>
+            <!-- Central точка -->
+            <div class="w-4 h-4 bg-amber-500 rounded-full shadow-[0_0_15px_#f59e0b]"></div>
         </div>
+        <p class="mt-6 text-base font-semibold text-slate-300 animate-bounce">Buscando sinal estável...</p>
+    </div>
 
-        <!-- ЭКРАН 2: Результат взлома -->
-        <div id="result-screen" class="hidden w-full max-w-[260px] flex flex-col items-center">
-            <div class="w-full bg-[#130d2b] border border-purple-500/30 rounded-xl p-4 text-center shadow-lg relative">
-                
-                <div class="absolute -top-2.5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-900 font-black text-[8px] uppercase tracking-wider px-2.5 py-0.5 rounded-full">
-                    Sinal Confirmado
-                </div>
-                
-                <!-- Коэффициент уменьшен до text-4xl -->
-                <div id="odds-value" class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-purple-300 tracking-tight my-2 drop-shadow-md">
-                    --
-                </div>
-                
-                <p class="text-[9px] text-purple-200/50 px-1 mb-3">
-                    🎯 Entre na rodada agora e retire no valor acima!
-                </p>
-                
-                <!-- Кнопка с жестко ограниченной высотой (36px) -->
-                <a id="play-btn" href="https://lkmh.cc" target="_blank" class="flex items-center justify-center w-full h-[38px] bg-gradient-to-r from-amber-400 via-orange-500 to-pink-500 text-slate-950 font-black rounded-lg text-[11px] uppercase tracking-wide active:scale-95 transition-all">
-                    📱 JOGAR NO 1WIN
-                </a>
-            </div>
+    <!-- ЭКРАН 2: Показ готового коэффициента (изначально скрыт) -->
+    <div id="result-screen" class="hidden flex flex-col items-center justify-center text-center">
+        <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-6 shadow-2xl max-w-xs w-full">
+            <span class="text-xs uppercase bg-emerald-500/20 text-emerald-400 font-bold px-3 py-1 rounded-full">Sinal Confirmado</span>
             
-            <!-- Кнопка обновления с жесткой высотой -->
-            <button onclick="generateSignal()" class="mt-3 flex items-center justify-center space-x-1 h-[32px] text-[9px] text-purple-400/80 font-mono bg-purple-950/20 px-3 rounded-md border border-purple-500/10">
-                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-                </svg>
-                <span>GERAR PRÓXIMO SINAL</span>
-            </button>
+            <!-- Сюда скрипт подставит число -->
+            <div id="odds-value" class="text-5xl font-black my-5 text-white tracking-tight">--</div>
+            
+            <p class="text-xs text-slate-400 mb-4">🟢 Entre na rodada agora e retire antes do limite!</p>
+            
+            <!-- Кнопка действия -->
+            <a id="play-btn" href="https://lkmh.cc" target="_blank" class="block w-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-900 font-bold py-3 rounded-xl shadow-lg hover:brightness-110 active:scale-95 transition-all text-sm uppercase tracking-wider">
+                📱 Jogar no 1win
+            </a>
         </div>
-
-    </div>
-
-    <!-- НИЖНЯЯ ПАНЕЛЬ -->
-    <div class="w-full text-center mb-1">
-        <p class="text-[8px] text-purple-400/20 font-mono">🔒 SECURE CONNECTION</p>
+        
+        <!-- Кнопка "Получить новый сигнал" -->
+        <button onclick="generateSignal()" class="mt-6 text-xs text-slate-400 underline decoration-dotted hover:text-white">
+            🔄 Gerar nova previsão
+        </button>
     </div>
 
     <script>
+        // Инициализация Telegram WebApp API
         const tg = window.Telegram.WebApp;
-        if (tg) {
-            tg.expand();
-            if (tg.ready) tg.ready();
+        if (tg && tg.expand) {
+            tg.expand(); // Расширяем приложение на весь экран смартфона
         }
 
+        // Алгоритм генерации коэффициентов (копия вашей логики из бота)
         const def_generate_odds = () => {
             let chance = Math.floor(Math.random() * 100) + 1;
             if (chance <= 10) return (Math.random() * (1.20 - 1.01) + 1.01).toFixed(2);
@@ -108,21 +79,29 @@
         }
 
         function generateSignal() {
+            // Переключаемся обратно на экран радара
             document.getElementById('result-screen').classList.add('hidden');
             document.getElementById('radar-screen').classList.remove('hidden');
 
+            // Имитируем «процесс взлома» длительностью 3 секунды
             setTimeout(() => {
                 const odds = def_generate_odds();
+                
+                // Подставляем значение в интерфейс
                 document.getElementById('odds-value').innerText = odds + 'x';
+                
+                // Прячем радар, показываем результат
                 document.getElementById('radar-screen').classList.add('hidden');
                 document.getElementById('result-screen').classList.remove('hidden');
                 
+                // Небольшая вибрация телефона
                 if (tg && tg.HapticFeedback) {
                     tg.HapticFeedback.notificationOccurred('success');
                 }
             }, 3000); 
         }
 
+        // Запускаем генерацию сразу при открытии приложения
         window.onload = generateSignal;
     </script>
 </body>
