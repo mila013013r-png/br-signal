@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sinais VIP</title>
+    <title>Lucky Jet - AI Hacker</title>
     <script src="https://telegram.org"></script>
     <style>
-        /* Чистый CSS: гарантирует одинаковый размер на всех смартфонах */
+        /* БАЗОВЫЕ НАСТРОЙКИ КОСМОСА */
         body {
-            background-color: #0f172a;
+            background: radial-gradient(circle at center, #1a103c 0%, #0b071e 100%);
             color: #ffffff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
@@ -16,182 +16,265 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            min-h-screen: 100vh;
-            height: 95vh;
+            justify-content: space-between;
+            height: 100vh;
             box-sizing: border-box;
             overflow: hidden;
             -webkit-text-size-adjust: 100%;
         }
 
+        /* МЕРЦАЮЩИЕ ЗВЕЗДЫ НА ФОНЕ */
+        .stars {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(white 1px, transparent 0), radial-gradient(rgba(255,255,255,0.3) 1px, transparent 0);
+            background-size: 40px 40px, 90px 90px;
+            background-position: 0 0, 20px 20px;
+            opacity: 0.25;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* ВЕРХНЯЯ ПАНЕЛЬ С ИМЕНЕМ ИГРЫ */
         .header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-top: 10px;
         }
 
-        .header h1 {
-            font-size: 20px;
+        .brand-title {
+            font-size: 18px;
             font-weight: 900;
-            letter-spacing: 1px;
-            color: #fbbf24;
-            margin: 0 0 4px 0;
-        }
-
-        .header p {
-            font-size: 12px;
-            color: #94a3b8;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #60a5fa, #f472b6, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin: 0;
+            text-transform: uppercase;
         }
 
-        /* Жестко фиксированный размер радара в пикселях */
-        .radar-wrapper {
+        .subtitle {
+            font-size: 9px;
+            color: rgba(168, 85, 247, 0.6);
+            letter-spacing: 2px;
+            margin-top: 4px;
+            font-family: monospace;
+        }
+
+        /* КОСМИЧЕСКИЙ КРУГОВОЙ РАДАР С ЛОГОТИПОМ ЛАКИ ДЖЕТА */
+        .radar-box {
             position: relative;
-            width: 160px;
-            height: 160px;
+            width: 170px;
+            height: 170px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
         }
 
-        .circle-outer {
+        /* Крутящаяся вокруг логотипа линия */
+        .radar-scanner {
             position: absolute;
             width: 100%;
             height: 100%;
-            border: 2px dashed rgba(245, 158, 11, 0.3);
+            border: 2px solid transparent;
+            border-top: 3px solid #ff007f;
+            border-left: 2px solid rgba(0, 191, 255, 0.4);
             border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+            animation: spin 1.8s linear infinite;
         }
 
-        .circle-radar {
+        .radar-grid {
             position: absolute;
-            width: 90%;
-            height: 90%;
-            border: 4px solid transparent;
-            border-top-color: #f59e0b;
+            width: 80%;
+            height: 80%;
+            border: 1px solid rgba(147, 51, 234, 0.2);
             border-radius: 50%;
-            animation: spin 2s linear infinite;
         }
 
-        .center-dot {
-            width: 16px;
-            height: 16px;
-            background-color: #f59e0b;
+        /* Центральный круг с векторным логотипом космонавта */
+        .logo-center {
+            position: relative;
+            z-index: 5;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
             border-radius: 50%;
-            box-shadow: 0 0 12px #f59e0b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(219, 39, 119, 0.6);
+            animation: float 3s ease-in-out infinite;
         }
 
-        .status-text {
-            font-size: 13px;
-            color: #cbd5e1;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        /* Карточка с результатом */
+        /* КИБЕРПАНК КАРТОЧКА СИГНАЛА */
         .card {
-            background-color: rgba(30, 41, 59, 0.9);
-            border: 1px solid #334155;
-            border-radius: 16px;
-            padding: 20px;
-            width: 240px; /* Жесткая ширина карточки */
+            background: linear-gradient(180deg, #18113c 0%, #0e0a26 100%);
+            border: 1px solid rgba(147, 51, 234, 0.4);
+            border-radius: 20px;
+            padding: 16px;
+            width: 250px;
             text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6), 0 0 20px rgba(147, 51, 234, 0.15);
         }
 
         .badge {
             display: inline-block;
-            font-size: 10px;
+            font-size: 9px;
             text-transform: uppercase;
-            background-color: rgba(16, 185, 129, 0.2);
+            letter-spacing: 1px;
+            background-color: rgba(52, 211, 153, 0.15);
             color: #34d399;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 9999px;
-            margin-bottom: 12px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(52, 211, 153, 0.2);
         }
 
-        .odds {
-            font-size: 42px;
+        /* НЕОНОВЫЕ КРАСИВЫЕ ЦИФРЫ КОЭФФИЦИЕНТА */
+        .odds-text {
+            font-size: 52px;
             font-weight: 900;
             color: #ffffff;
-            margin: 10px 0;
+            margin: 6px 0;
+            letter-spacing: -1px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 20px rgba(147, 51, 234, 0.5);
         }
 
-        .card-p {
+        .info-p {
             font-size: 11px;
-            color: #94a3b8;
-            margin: 0 0 16px 0;
-            line-height: 1.4;
+            color: #a78bfa;
+            margin: 0 0 14px 0;
+            opacity: 0.8;
         }
 
-        /* Кнопка перехода на 1win с жесткой высотой */
+        /* КНОПКА КРАСИВОГО ХАЙТЕК ВИДА */
         .btn-play {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
-            height: 40px;
-            background: linear-gradient(to right, #f59e0b, #ea580c);
-            color: #0f172a;
-            font-weight: 700;
-            font-size: 13px;
+            height: 42px;
+            background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%);
+            color: #05030f;
+            font-weight: 900;
+            font-size: 12px;
             text-transform: uppercase;
             text-decoration: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(234, 88, 12, 0.3);
+            border-radius: 10px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+            transition: transform 0.1s;
         }
 
-        /* Кнопка обновления */
+        .btn-play:active {
+            transform: scale(0.97);
+        }
+
         .btn-refresh {
-            background: none;
-            border: none;
-            color: #94a3b8;
-            text-decoration: underline;
-            font-size: 11px;
-            margin-top: 16px;
+            background: rgba(147, 51, 234, 0.1);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            color: #c084fc;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 14px;
             cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .hidden {
-            display: none !important;
+        .status-box {
+            font-size: 11px;
+            color: #60a5fa;
+            font-weight: 700;
+            font-family: monospace;
+            background: rgba(30, 58, 138, 0.3);
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            letter-spacing: 1px;
         }
 
+        .footer {
+            font-size: 8px;
+            color: rgba(147, 51, 234, 0.3);
+            font-family: monospace;
+            margin-bottom: 10px;
+        }
+
+        .hidden { display: none !important; }
+
+        /* АНИМАЦИИ */
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>⚡ HACKER ALGORITMO</h1>
-        <p>Analisando a matriz do jogo em tempo real...</p>
-    </div>
+    <div class="stars"></div>
 
-    <!-- ЭКРАН С КРУТИЛКОЙ -->
-    <div id="radar-screen" style="display: flex; flex-direction: column; align-items: center;">
-        <div class="radar-wrapper">
-            <div class="circle-outer"></div>
-            <div class="circle-radar"></div>
-            <div class="center-dot"></div>
+    <div class="container">
+        
+        <!-- ВЕРХ -->
+        <div class="header">
+            <h1 class="brand-title">Lucky Jet Mod</h1>
+            <div class="subtitle">AI MATRIX SYSTEM v4.1</div>
         </div>
-        <div class="status-text">Buscando sinal estável...</div>
-    </div>
 
-    <!-- ЭКРАН С РЕЗУЛЬТАТОМ -->
-    <div id="result-screen" class="hidden">
-        <div class="card">
-            <div class="badge">Sinal Confirmado</div>
-            <div id="odds-value" class="odds">--</div>
-            <p class="card-p">🟢 Entre na rodada agora e retire antes do limite!</p>
-            <a id="play-btn" href="https://lkmh.cc" target="_blank" class="btn-play">
-                📱 Jogar no 1win
-            </a>
+        <!-- ЦЕНТР: ЭКРАН ЗАГРУЗКИ (РАДАР) -->
+        <div id="radar-screen" style="display: flex; flex-direction: column; align-items: center; justify-content: center; my-auto;">
+            <div class="radar-box">
+                <div class="radar-scanner"></div>
+                <div class="radar-grid"></div>
+                <!-- Фирменный Космонавт Джо в центре (Векторный SVG) -->
+                <div class="logo-center">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24" style="width:32px; height:32px;">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 12 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6zM12 4c.55 0 1 .45 1 1v1.17c1.72.44 3 2.01 3 3.83v2l2 v1H6v-1l2-2v-2c0-1.82 1.28-3.39 3-3.83V5c0-.55.45-1 1-1z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="status-box" style="margin-top: 25px;">ANODIZANDO DATA...</div>
         </div>
-        <button onclick="generateSignal()" class="btn-refresh">
-            🔄 Gerar nova previsão
-        </button>
+
+        <!-- ЦЕНТР: ЭКРАН С РЕЗУЛЬТАТОМ -->
+        <div id="result-screen" class="hidden" style="margin-auto;">
+            <div class="card">
+                <div class="badge">Sinal Confirmado</div>
+                <div id="odds-value" class="odds-text">--</div>
+                <p class="info-p">🎯 Entre na rodada agora e retire antes!</p>
+                <a id="play-btn" href="https://lkmh.cc" target="_blank" class="btn-play">
+                    📱 JOGAR NO 1WIN
+                </a>
+            </div>
+            <div style="text-align:center;">
+                <button onclick="generateSignal()" class="btn-refresh">
+                    🔄 RE-ESCANEAR
+                </button>
+            </div>
+        </div>
+
+        <!-- НИЗ -->
+        <div class="footer">🔒 SSL SECURE SYSTEM LINK</div>
+
     </div>
 
     <script>
@@ -210,21 +293,3 @@
 
         function generateSignal() {
             document.getElementById('result-screen').classList.add('hidden');
-            document.getElementById('radar-screen').style.display = 'flex';
-
-            setTimeout(() => {
-                const odds = def_generate_odds();
-                document.getElementById('odds-value').innerText = odds + 'x';
-                document.getElementById('radar-screen').style.display = 'none';
-                document.getElementById('result-screen').classList.remove('hidden');
-                
-                if (tg && tg.HapticFeedback) {
-                    tg.HapticFeedback.notificationOccurred('success');
-                }
-            }, 3000); 
-        }
-
-        window.onload = generateSignal;
-    </script>
-</body>
-</html>
